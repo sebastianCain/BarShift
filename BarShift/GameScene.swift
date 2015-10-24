@@ -11,16 +11,19 @@ import SpriteKit
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
+        
+        self.scene?.view?.backgroundColor = SKColor.darkGrayColor()
+        
+        let myLabel = SKLabelNode(fontNamed:"Avenir-Book")
+        myLabel.text = "start";
         myLabel.fontSize = 45;
         myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-        
+        myLabel.name = "start"
         self.addChild(myLabel)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
+       /* Called when a touch begins
         
         for touch in touches {
             let location = touch.locationInNode(self)
@@ -36,6 +39,17 @@ class GameScene: SKScene {
             sprite.runAction(SKAction.repeatActionForever(action))
             
             self.addChild(sprite)
+        }*/
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first
+        let location = touch!.locationInNode(self)
+        let touchedNode = nodeAtPoint(location)
+        let bss = BarShiftScene()
+        bss.scaleMode = .ResizeFill
+        if touchedNode.name == "start" {
+            self.scene?.view?.presentScene(bss, transition: SKTransition.doorsOpenHorizontalWithDuration(0.2))
         }
     }
    
