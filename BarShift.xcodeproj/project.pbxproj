@@ -14,6 +14,7 @@
 		383C85461BDC01CB004C344F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383C85441BDC01CB004C344F /* Main.storyboard */; };
 		383C85481BDC01CB004C344F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383C85471BDC01CB004C344F /* Assets.xcassets */; };
 		383C854B1BDC01CB004C344F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383C85491BDC01CB004C344F /* LaunchScreen.storyboard */; };
+		383C85531BDC065C004C344F /* BarShiftScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C85521BDC065C004C344F /* BarShiftScene.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		383C85471BDC01CB004C344F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		383C854A1BDC01CB004C344F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		383C854C1BDC01CB004C344F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		383C85521BDC065C004C344F /* BarShiftScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarShiftScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				383C853C1BDC01CB004C344F /* AppDelegate.swift */,
 				383C853E1BDC01CB004C344F /* GameScene.sks */,
 				383C85401BDC01CB004C344F /* GameScene.swift */,
+				383C85521BDC065C004C344F /* BarShiftScene.swift */,
 				383C85421BDC01CB004C344F /* GameViewController.swift */,
 				383C85441BDC01CB004C344F /* Main.storyboard */,
 				383C85471BDC01CB004C344F /* Assets.xcassets */,
@@ -101,6 +104,7 @@
 				TargetAttributes = {
 					383C85381BDC01CA004C344F = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 9XWYL3K4YT;
 					};
 				};
 			};
@@ -144,6 +148,7 @@
 				383C85411BDC01CB004C344F /* GameScene.swift in Sources */,
 				383C85431BDC01CB004C344F /* GameViewController.swift in Sources */,
 				383C853D1BDC01CB004C344F /* AppDelegate.swift in Sources */,
+				383C85531BDC065C004C344F /* BarShiftScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,10 +261,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BarShift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isometric.BarShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -267,10 +275,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BarShift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isometric.BarShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
