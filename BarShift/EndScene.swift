@@ -11,8 +11,8 @@ import SpriteKit
 class EndScene: SKScene {
     
     override func didMoveToView(view: SKView) {
-        let emerald = SKColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0)
-        self.backgroundColor = emerald
+        //let emerald = SKColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0)
+        self.backgroundColor = SKColor.redColor()
         
         let myLabel = SKLabelNode(fontNamed:"Avenir-Book")
         myLabel.text = "you lost. gg";
@@ -38,7 +38,7 @@ class EndScene: SKScene {
         let bss = BarShiftScene()
         bss.scaleMode = .ResizeFill
         if touchedNode.name == "retry" {
-            self.scene?.view?.presentScene(bss, transition: SKTransition.doorsOpenHorizontalWithDuration(0.2))
+            self.scene?.view?.presentScene(bss, transition: SKTransition.fadeWithDuration(0.2))
         }
     }
     

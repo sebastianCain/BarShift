@@ -15,10 +15,17 @@ class GameScene: SKScene {
         let emerald = SKColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0)
         self.backgroundColor = emerald
         
+        let titleLabel = SKLabelNode(fontNamed:"Avenir-Book")
+        titleLabel.text = "bar//shift";
+        titleLabel.fontSize = 72;
+        titleLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame)+100);
+        titleLabel.name = "start"
+        self.addChild(titleLabel)
+        
         let myLabel = SKLabelNode(fontNamed:"Avenir-Book")
         myLabel.text = "start";
         myLabel.fontSize = 45;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame)-50);
         myLabel.name = "start"
         self.addChild(myLabel)
     }

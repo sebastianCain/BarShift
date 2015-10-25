@@ -31,10 +31,12 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
     
     
     var currentBar = SKShapeNode()
-    var bars = Array<SKShapeNode>!()
+    var bars : Array<SKShapeNode>!
     
     var score = 0
     var scoreLabel = SKLabelNode()
+    
+    var gameover = false
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -43,13 +45,13 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
         backgroundNode.position = CGPointMake(0, 0)
         
         bar1 = createBar(0)
-        bar2 = createBar(2)
-        bar3 = createBar(4)
+        bar2 = createBar(1)
+        bar3 = createBar(2)
         backgroundNode.addChild(self.bar1)
         backgroundNode.addChild(self.bar2)
         backgroundNode.addChild(self.bar3)
         
-        self.bars = [self.bar11, self.bar12, self.bar21, self.bar22, self.bar31, self.bar32]
+        self.bars = [self.bar1, self.bar2, self.bar3]
         
         self.ball = createBall()
         backgroundNode.addChild(self.ball)
@@ -57,6 +59,14 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
         currentBar = bar1
         
         self.addChild(backgroundNode)
+        
+        scoreLabel = SKLabelNode()
+        scoreLabel.position = CGPointMake(self.frame.width/2, self.frame.height/2+100)
+        scoreLabel.fontName = "Avenir-Book"
+        scoreLabel.fontSize = 200
+        scoreLabel.text = "\(score)"
+        scoreLabel.fontColor = UIColor(white: 1, alpha: 0.1)
+        self.addChild(scoreLabel)
         
         startGame()
         
@@ -85,42 +95,27 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createBar(index : Int) -> SKShapeNode {
-        let bar = SKShapeNode(rectOfSize: CGSizeMake(50, 1))
         
-        bars[index] = SKShapeNode(rectOfSize: CGSizeMake(25, 1))
-        bars[index+1] = SKShapeNode(rectOfSize: CGSizeMake(25, 1))
-        
+        let bar : SKShapeNode = SKShapeNode(rectOfSize: CGSizeMake(50, 1))
+        bar.strokeColor = emerald
         if index == 0 {
             bar.position = CGPointMake(CGRectGetMidX(self.frame), 150)
-            bar.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(25, 5), center: CGPointMake(CGRectGetMidX(bar1.frame), CGRectGetMidY(bar1.frame)-10))
+            bar.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(50, 5), center: CGPointMake(CGRectGetMidX(bar1.frame), CGRectGetMidY(bar1.frame)-10))
         } else if index == 1 {
             bar.position = CGPointMake(187.5-100, 350)
-            bar.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(25, 5), center: CGPointMake(CGRectGetMidX(bar2.frame), CGRectGetMidY(bar2.frame)))
+            bar.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(50, 5), center: CGPointMake(CGRectGetMidX(bar2.frame), CGRectGetMidY(bar2.frame)))
         } else if index == 2 {
             bar.position = CGPointMake(187.5+100, 550)
-            bar.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(25, 5), center: CGPointMake(CGRectGetMidX(bar3.frame), CGRectGetMidY(bar3.frame)))
+            bar.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(50, 5), center: CGPointMake(CGRectGetMidX(bar3.frame), CGRectGetMidY(bar3.frame)))
         }
         
-        bars[index].physicsBody?.dynamic = false
-        bars[index].physicsBody?.affectedByGravity = false
-        bars[index].physicsBody?.allowsRotation = false
-        bars[index].physicsBody?.categoryBitMask = barCategory
-        bars[index].physicsBody?.collisionBitMask = ballCategory
-        bars[index].physicsBody?.contactTestBitMask = ballCategory
-        bars[index].position = CGPointMake(-12.5, 0)
-        bars[index].name = "bar\(index)"
-        
-        bars[index+1].physicsBody?.dynamic = false
-        bars[index+1].physicsBody?.affectedByGravity = false
-        bars[index+1].physicsBody?.allowsRotation = false
-        bars[index+1].physicsBody?.categoryBitMask = barCategory
-        bars[index+1].physicsBody?.collisionBitMask = ballCategory
-        bars[index+1].physicsBody?.contactTestBitMask = ballCategory
-        bars[index].position = CGPointMake(12.5, 0)
-        bars[index+1].name = "bar\(index+1)"
-        
-        bar.addChild(bars[index])
-        bar.addChild(bars[index+1])
+        bar.physicsBody?.dynamic = false
+        bar.physicsBody?.affectedByGravity = false
+        bar.physicsBody?.allowsRotation = false
+        bar.physicsBody?.categoryBitMask = barCategory
+        bar.physicsBody?.collisionBitMask = ballCategory
+        bar.physicsBody?.contactTestBitMask = ballCategory
+        bar.name = "bar\(index)"
         return bar
     }
     
@@ -147,6 +142,7 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
         if ball.physicsBody?.velocity.dy <= 150 &&  ball.physicsBody?.velocity.dy > 0 || ball.physicsBody?.velocity.dy > 800 {
             ball.physicsBody?.velocity = CGVectorMake(0, 900)
             score += 1
+            scoreLabel.text = "\(score)"
         } else {
             return
         }
@@ -161,7 +157,7 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //bar.node?.runAction(SKAction.moveBy(CGVectorMake(0, -200), duration: 0.2))
-        bar.node?.runAction(SKAction.runBlock({bar.node?.position.y += 600}))
+        bar.node?.runAction(SKAction.runBlock({bar.node?.position.y += 600 + CGFloat(score)*5}))
         
         if bar.node?.name == "bar0" {
             currentBar = bar2
@@ -177,10 +173,12 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
     override func update(currentTime: NSTimeInterval) {
         if ball.position.y >= -backgroundNode.position.y + self.frame.size.height/2 {
             backgroundNode.position.y -= ball.position.y - (-backgroundNode.position.y + self.frame.size.height/2)
-        } else if ball.position.y < -backgroundNode.position.y {
+        } else if ball.position.y < -backgroundNode.position.y && gameover == false {
             self.paused = true
-            self.scene?.view?.presentScene(EndScene(), transition: SKTransition.fadeWithDuration(1))
+            self.removeAllChildren()
+            self.scene?.view?.presentScene(EndScene(), transition: SKTransition.fadeWithDuration(0.5))
             print("GAME OVER")
+            gameover = true
         }
     }
 }
