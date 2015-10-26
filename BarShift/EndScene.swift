@@ -38,6 +38,7 @@ class EndScene: SKScene {
         let bss = BarShiftScene()
         bss.scaleMode = .ResizeFill
         if touchedNode.name == "retry" {
+            print("ayy")
             self.scene?.view?.presentScene(bss, transition: SKTransition.fadeWithDuration(0.2))
         }
     }

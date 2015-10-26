@@ -133,7 +133,7 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
         } else {
             //self.paused = true
             //self.scene?.view?.presentScene(GameScene(), transition: SKTransition.doorsCloseHorizontalWithDuration(0.2))
-            print("GAME OVER")
+            print("GAME OVER", terminator: "")
         }
     }
     
@@ -177,7 +177,7 @@ class BarShiftScene: SKScene, SKPhysicsContactDelegate {
             self.paused = true
             self.removeAllChildren()
             self.scene?.view?.presentScene(EndScene(), transition: SKTransition.fadeWithDuration(0.5))
-            print("GAME OVER")
+            print("GAME OVER", terminator: "")
             gameover = true
         }
     }

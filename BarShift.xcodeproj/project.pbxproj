@@ -102,6 +102,8 @@
 		383C85311BDC01CA004C344F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Isometric LLC";
 				TargetAttributes = {
@@ -310,6 +312,7 @@
 				383C85511BDC01CB004C344F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
